@@ -1,0 +1,61 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kia.nodemail.FragmentSabah">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/sabahtatli"
+            android:layout_below="@+id/sabahek"
+            android:layout_alignStart="@+id/sabahek" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/sabahek"
+            android:layout_below="@+id/sabahana"
+            android:layout_alignStart="@+id/sabahana" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/sabahana"
+            android:layout_below="@+id/sabahcorba"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/sabahcorba"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OncekiGun"
+            android:id="@+id/sabahonceki"
+            android:layout_below="@+id/sabahtatli"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sonraki Gün"
+            android:id="@+id/sabahsonraki"
+            android:layout_alignTop="@+id/sabahonceki"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</FrameLayout>
