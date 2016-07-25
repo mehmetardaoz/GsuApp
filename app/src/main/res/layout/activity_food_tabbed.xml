@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="kia.nodemail.FoodTabbed">
+    tools:context="kia.nodemail.FoodTabbed"
+
+   >
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -51,7 +53,7 @@
             android:focusable="false"
             android:layout_marginBottom="20dp"
 
-            app:tabIndicatorHeight="4dp"
+            app:tabIndicatorHeight="0dp"
             />
 
 

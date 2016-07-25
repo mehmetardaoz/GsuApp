@@ -3,6 +3,7 @@ package kia.nodemail;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,13 +45,15 @@ public class FragmentOglen extends Fragment implements FoodTabbed.YourFragmentIn
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    TextView ocorba, oana,oek,otatli;
+    TextView ocorba, oana,oek,otatli,baslik;
     ServerRequest sr;
     List<NameValuePair> params;
     String anayemek,ekyemek,tatli,corba;
     Button oncekigun, sonrakigun;
     SharedPreferences yemekoglen;
     View rootView;
+    ArrayAdapter adapter;
+    ListView lw_yemek;
 
 
 
@@ -93,8 +98,17 @@ public class FragmentOglen extends Fragment implements FoodTabbed.YourFragmentIn
             Log.d("Hello", String.valueOf(FoodTabbed.haftaningunu));
         }
         else {
+            /*final String[] values = new String[]{yemekoglen.getString("anayemek" + FoodTabbed.gun, ""),yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""),yemekoglen.getString("tatli" + FoodTabbed.gun, ""),yemekoglen.getString("corba" + FoodTabbed.gun, "")};
+            final String[] values = new String[]{"ahmet","mehmet"};
 
+            lw_yemek = (ListView) rootView.findViewById(R.id.lw_Yemek);
+            adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
+            lw_yemek.setAdapter(adapter);*/
             rootView = inflater.inflate(R.layout.fragment_oglen, container, false);
+            baslik = (TextView) rootView.findViewById(R.id.baslikuni);
+            Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
+            baslik.setTypeface(font);
+
             ocorba = (TextView) rootView.findViewById(R.id.oglencorba);
             oana = (TextView) rootView.findViewById(R.id.oglenana);
             oek = (TextView) rootView.findViewById(R.id.oglenek);
@@ -103,10 +117,10 @@ public class FragmentOglen extends Fragment implements FoodTabbed.YourFragmentIn
             sonrakigun = (Button) rootView.findViewById(R.id.gunsonraki);
 
 
-            ocorba.setText(yemekoglen.getString("anayemek" + FoodTabbed.gun, ""));
+           /*ocorba.setText(yemekoglen.getString("anayemek" + FoodTabbed.gun, ""));
             oana.setText(yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""));
             oek.setText(yemekoglen.getString("tatli" + FoodTabbed.gun, ""));
-            otatli.setText(yemekoglen.getString("corba" + FoodTabbed.gun, ""));
+            otatli.setText(yemekoglen.getString("corba" + FoodTabbed.gun, ""));*/
 
             oncekigun.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -126,7 +140,11 @@ public class FragmentOglen extends Fragment implements FoodTabbed.YourFragmentIn
                 @Override
                 public void onClick(View v) {
                     if (Integer.valueOf(FoodTabbed.gun) + 1 < 31) {
+
                         FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) + 1);
+                        /*final String[] values = new String[]{yemekoglen.getString("anayemek" + FoodTabbed.gun, ""),yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""),yemekoglen.getString("tatli" + FoodTabbed.gun, ""),yemekoglen.getString("corba" + FoodTabbed.gun, "")};
+                        adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
+                        lw_yemek.setAdapter(adapter);*/
                         ocorba.setText(yemekoglen.getString("anayemek" + FoodTabbed.gun, ""));
                         oana.setText(yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""));
                         oek.setText(yemekoglen.getString("tatli" + FoodTabbed.gun, ""));
