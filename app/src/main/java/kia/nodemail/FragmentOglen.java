@@ -48,6 +48,7 @@ public class FragmentOglen extends Fragment implements FoodTabbed.YourFragmentIn
     String anayemek,ekyemek,tatli,corba;
     Button oncekigun, sonrakigun;
     SharedPreferences yemekoglen;
+    View rootView;
 
 
 
@@ -87,55 +88,58 @@ public class FragmentOglen extends Fragment implements FoodTabbed.YourFragmentIn
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         yemekoglen = getContext().getSharedPreferences("OglenYemek",Context.MODE_PRIVATE);
+        if(FoodTabbed.haftaningunu == 1 ||FoodTabbed.haftaningunu == 7){
+            rootView = inflater.inflate(R.layout.fragment_haftasonu,container,false);
+            Log.d("Hello", String.valueOf(FoodTabbed.haftaningunu));
+        }
+        else {
 
-        View rootView = inflater.inflate(R.layout.fragment_oglen, container, false);
-        ocorba = (TextView) rootView.findViewById(R.id.oglencorba);
-        oana = (TextView) rootView.findViewById(R.id.oglenana);
-        oek = (TextView) rootView.findViewById(R.id.oglenek);
-        otatli = (TextView) rootView.findViewById(R.id.oglentatli);
-        oncekigun = (Button) rootView.findViewById(R.id.gunonceki);
-        sonrakigun = (Button) rootView.findViewById(R.id.gunsonraki);
+            rootView = inflater.inflate(R.layout.fragment_oglen, container, false);
+            ocorba = (TextView) rootView.findViewById(R.id.oglencorba);
+            oana = (TextView) rootView.findViewById(R.id.oglenana);
+            oek = (TextView) rootView.findViewById(R.id.oglenek);
+            otatli = (TextView) rootView.findViewById(R.id.oglentatli);
+            oncekigun = (Button) rootView.findViewById(R.id.gunonceki);
+            sonrakigun = (Button) rootView.findViewById(R.id.gunsonraki);
 
 
-        ocorba.setText(yemekoglen.getString("anayemek"+FoodTabbed.gun,""));
-        oana.setText( yemekoglen.getString("ekyemek"+FoodTabbed.gun,""));
-        oek.setText(yemekoglen.getString("tatli"+FoodTabbed.gun,""));
-        otatli.setText(yemekoglen.getString("corba"+FoodTabbed.gun,""));
+            ocorba.setText(yemekoglen.getString("anayemek" + FoodTabbed.gun, ""));
+            oana.setText(yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""));
+            oek.setText(yemekoglen.getString("tatli" + FoodTabbed.gun, ""));
+            otatli.setText(yemekoglen.getString("corba" + FoodTabbed.gun, ""));
 
-        oncekigun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.valueOf(FoodTabbed.gun) - 1 > 0) {
-                    FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) - 1);
-                    ocorba.setText(yemekoglen.getString("anayemek" + FoodTabbed.gun, ""));
-                    oana.setText(yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""));
-                    oek.setText(yemekoglen.getString("tatli" + FoodTabbed.gun, ""));
-                    otatli.setText(yemekoglen.getString("corba" + FoodTabbed.gun, ""));
-                }
-                else Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        sonrakigun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.valueOf(FoodTabbed.gun) + 1 < 31) {
-                    FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) + 1);
-                    ocorba.setText(yemekoglen.getString("anayemek" + FoodTabbed.gun, ""));
-                    oana.setText(yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""));
-                    oek.setText(yemekoglen.getString("tatli" + FoodTabbed.gun, ""));
-                    otatli.setText(yemekoglen.getString("corba" + FoodTabbed.gun, ""));
+            oncekigun.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Integer.valueOf(FoodTabbed.gun) - 1 > 0) {
+                        FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) - 1);
+                        ocorba.setText(yemekoglen.getString("anayemek" + FoodTabbed.gun, ""));
+                        oana.setText(yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""));
+                        oek.setText(yemekoglen.getString("tatli" + FoodTabbed.gun, ""));
+                        otatli.setText(yemekoglen.getString("corba" + FoodTabbed.gun, ""));
+                    } else Toast.makeText(getContext(), "Gï¿½nï¿½ Aï¿½tï¿½nï¿½z", Toast.LENGTH_SHORT).show();
 
                 }
-                else{
-                    Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
+            });
+
+            sonrakigun.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Integer.valueOf(FoodTabbed.gun) + 1 < 31) {
+                        FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) + 1);
+                        ocorba.setText(yemekoglen.getString("anayemek" + FoodTabbed.gun, ""));
+                        oana.setText(yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""));
+                        oek.setText(yemekoglen.getString("tatli" + FoodTabbed.gun, ""));
+                        otatli.setText(yemekoglen.getString("corba" + FoodTabbed.gun, ""));
+
+                    } else {
+                        Toast.makeText(getContext(), "GÃ¼nÃ¼ AÅŸtÄ±nÄ±z", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-        });
+            });
 
-
+        }
 
 
         return rootView;

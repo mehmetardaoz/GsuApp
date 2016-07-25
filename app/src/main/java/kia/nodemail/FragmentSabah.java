@@ -42,6 +42,7 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
     TextView scorba,sana,sek,statli;
     SharedPreferences yemeksabah;
     Button sabahoncek,sabahsonraki;
+    View rootView;
 
 
 
@@ -54,8 +55,6 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment FragmentSabah.
      */
     // TODO: Rename and change types and number of parameters
@@ -81,7 +80,7 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
 
         yemeksabah = getContext().getSharedPreferences("SabahYemek",Context.MODE_PRIVATE);
 
-        Log.d("Hello","Ben gittim");
+        Log.d("Hello", String.valueOf(FoodTabbed.haftaningunu));
 
 
         
@@ -90,53 +89,57 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
 
 
 
+        if(FoodTabbed.haftaningunu == 1 ||FoodTabbed.haftaningunu == 7){
+            rootView = inflater.inflate(R.layout.fragment_haftasonu,container,false);
+            Log.d("Hello", String.valueOf(FoodTabbed.haftaningunu));
+        }
 
+        else {
 
-        View rootView = inflater.inflate(R.layout.fragment_sabah, container, false);
-        scorba = (TextView) rootView.findViewById(R.id.sabahcorba);
-        sana = (TextView) rootView.findViewById(R.id.sabahana);
-        sek = (TextView) rootView.findViewById(R.id.sabahek);
-        statli = (TextView) rootView.findViewById(R.id.sabahtatli);
-        sabahoncek = (Button) rootView.findViewById(R.id.sabahonceki);
-        sabahsonraki = (Button) rootView.findViewById(R.id.sabahsonraki);
+            rootView = inflater.inflate(R.layout.fragment_sabah, container, false);
+            scorba = (TextView) rootView.findViewById(R.id.sabahcorba);
+            sana = (TextView) rootView.findViewById(R.id.sabahana);
+            sek = (TextView) rootView.findViewById(R.id.sabahek);
+            statli = (TextView) rootView.findViewById(R.id.sabahtatli);
+            sabahoncek = (Button) rootView.findViewById(R.id.sabahonceki);
+            sabahsonraki = (Button) rootView.findViewById(R.id.sabahsonraki);
 
-        scorba.setText(yemeksabah.getString("anayemek"+FoodTabbed.gun,""));
-        sana.setText( yemeksabah.getString("ekyemek"+FoodTabbed.gun,""));
-        sek.setText(yemeksabah.getString("tatli"+FoodTabbed.gun,""));
-        statli.setText(yemeksabah.getString("corba"+FoodTabbed.gun,""));
+            scorba.setText(yemeksabah.getString("anayemek" + FoodTabbed.gun, ""));
+            sana.setText(yemeksabah.getString("ekyemek" + FoodTabbed.gun, ""));
+            sek.setText(yemeksabah.getString("tatli" + FoodTabbed.gun, ""));
+            statli.setText(yemeksabah.getString("corba" + FoodTabbed.gun, ""));
 
-        sabahoncek.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.valueOf(FoodTabbed.gun) - 1 > 0) {
-                    FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) - 1);
-                    scorba.setText(yemeksabah.getString("anayemek" + FoodTabbed.gun, ""));
-                    sana.setText(yemeksabah.getString("ekyemek" + FoodTabbed.gun, ""));
-                    sek.setText(yemeksabah.getString("tatli" + FoodTabbed.gun, ""));
-                    statli.setText(yemeksabah.getString("corba" + FoodTabbed.gun, ""));
-                }
-                else Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        sabahsonraki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.valueOf(FoodTabbed.gun) + 1 < 31) {
-                    FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) + 1);
-                    scorba.setText(yemeksabah.getString("anayemek" + FoodTabbed.gun, ""));
-                    sana.setText(yemeksabah.getString("ekyemek" + FoodTabbed.gun, ""));
-                    sek.setText(yemeksabah.getString("tatli" + FoodTabbed.gun, ""));
-                    statli.setText(yemeksabah.getString("corba" + FoodTabbed.gun, ""));
+            sabahoncek.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Integer.valueOf(FoodTabbed.gun) - 1 > 0) {
+                        FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) - 1);
+                        scorba.setText(yemeksabah.getString("anayemek" + FoodTabbed.gun, ""));
+                        sana.setText(yemeksabah.getString("ekyemek" + FoodTabbed.gun, ""));
+                        sek.setText(yemeksabah.getString("tatli" + FoodTabbed.gun, ""));
+                        statli.setText(yemeksabah.getString("corba" + FoodTabbed.gun, ""));
+                    } else Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
 
                 }
-                else{
-                    Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
-                }
-            }
+            });
 
-        });
+            sabahsonraki.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Integer.valueOf(FoodTabbed.gun) + 1 < 31) {
+                        FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) + 1);
+                        scorba.setText(yemeksabah.getString("anayemek" + FoodTabbed.gun, ""));
+                        sana.setText(yemeksabah.getString("ekyemek" + FoodTabbed.gun, ""));
+                        sek.setText(yemeksabah.getString("tatli" + FoodTabbed.gun, ""));
+                        statli.setText(yemeksabah.getString("corba" + FoodTabbed.gun, ""));
+
+                    } else {
+                        Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            });
+        }
 
         return rootView;
     }

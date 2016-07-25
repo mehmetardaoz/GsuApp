@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 /**
  * Created by Ksi on 23.05.2016
  */
-public class ProfileActiv extends Activity {
+public class ProfileActiv extends AppCompatActivity{
     String token1,grav1;
     SharedPreferences pref;
     TextView token_text,grav_text;

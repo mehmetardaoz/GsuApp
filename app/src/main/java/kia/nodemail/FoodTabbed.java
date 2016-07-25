@@ -1,5 +1,6 @@
 package kia.nodemail;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +10,10 @@ import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -27,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -55,12 +60,16 @@ public class FoodTabbed extends AppCompatActivity{
     public static String gun = String.valueOf(maintenant.get(Calendar.DAY_OF_MONTH));
     public static String ay = String.valueOf(maintenant.get(Calendar.MONTH)+1);
     public static String yil = String.valueOf(maintenant.get(Calendar.YEAR));
+    public static int haftaningunu = maintenant.get(Calendar.DAY_OF_WEEK);
     SharedPreferences yemekoglen,yemekaksam,yemeksabah;
     ServerRequest sr;
     List<NameValuePair> params;
     String anayemek,ekyemek,tatli,corba;
     View dlProgressView;
-
+    DrawerLayout mDrawerLayout;
+    ListView mDrawerList;
+    ActionBarDrawerToggle mDrawerToggle;
+    String mTitle = "";
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -77,6 +86,7 @@ public class FoodTabbed extends AppCompatActivity{
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
 
 
         // Set up the ViewPager with the sections adapter.
@@ -103,7 +113,14 @@ public class FoodTabbed extends AppCompatActivity{
         });
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+
         tabLayout.setupWithViewPager(mViewPager);
+        for(int i=0; i < tabLayout.getTabCount()-1; i++) {
+            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
+            p.setMargins(0, 0, 350, 0);
+            tab.requestLayout();
+        }
 
 
         //ÖÐLEN YEMEK ÇEKME
@@ -253,6 +270,7 @@ public class FoodTabbed extends AppCompatActivity{
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position){
                 case 0:
+
                     return new FragmentSabah().newInstance();
                 case 1:
                     return new FragmentOglen().newInstance();

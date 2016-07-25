@@ -18,15 +18,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.net.http.RequestQueue;
 import android.os.AsyncTask;
 import android.util.Log;
-
 
 /**
  * Created by Ksi on 22.05.2016.
  */
 public class ServerRequest {
-    static InputStream is = null;
+   static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
 
