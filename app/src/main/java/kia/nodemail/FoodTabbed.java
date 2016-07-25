@@ -66,10 +66,7 @@ public class FoodTabbed extends AppCompatActivity{
     List<NameValuePair> params;
     String anayemek,ekyemek,tatli,corba;
     View dlProgressView;
-    DrawerLayout mDrawerLayout;
-    ListView mDrawerList;
-    ActionBarDrawerToggle mDrawerToggle;
-    String mTitle = "";
+    TabLayout tabLayout;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -92,6 +89,18 @@ public class FoodTabbed extends AppCompatActivity{
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+        tabLayout.setupWithViewPager(mViewPager);
+        for(int i=0; i < tabLayout.getTabCount()-1; i++) {
+            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
+            p.setMargins(0, 0, 0, 0);
+            tab.requestLayout();
+        }
+
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -104,6 +113,7 @@ public class FoodTabbed extends AppCompatActivity{
                 if (fragment != null) {
                     fragment.fragmentBecameVisible();
                 }
+                ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(position).setBackgroundResource(R.drawable.sabah);
             }
 
             @Override
@@ -111,17 +121,6 @@ public class FoodTabbed extends AppCompatActivity{
 
             }
         });
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
-        tabLayout.setupWithViewPager(mViewPager);
-        for(int i=0; i < tabLayout.getTabCount()-1; i++) {
-            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
-            p.setMargins(0, 0, 350, 0);
-            tab.requestLayout();
-        }
-
 
         //ÖÐLEN YEMEK ÇEKME
         yemekoglen = getSharedPreferences("OglenYemek", Context.MODE_PRIVATE);
@@ -293,11 +292,11 @@ public class FoodTabbed extends AppCompatActivity{
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Sabah";
+                    return "";
                 case 1:
-                    return "Öðle";
+                    return "";
                 case 2:
-                    return "Akþam";
+                    return "";
             }
             return null;
         }
