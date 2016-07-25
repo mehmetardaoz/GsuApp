@@ -2,6 +2,7 @@ package kia.nodemail;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,7 +95,14 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
         else {
 
             rootView = inflater.inflate(R.layout.fragment_aksam, container, false);
-            aksamonceki = (Button) rootView.findViewById(R.id.aksamonceki);
+            ListView lw_aksamYemek = (ListView) rootView.findViewById(R.id.lw_aksamYemek);
+            final String[] values = new String[]{yemekaksam.getString("anayemek" + FoodTabbed.gun, ""),yemekaksam.getString("ekyemek" + FoodTabbed.gun, ""),yemekaksam.getString("tatli" + FoodTabbed.gun, ""),yemekaksam.getString("corba" + FoodTabbed.gun, "")};
+            ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
+            lw_aksamYemek.setAdapter(adapter);
+            TextView baslik = (TextView) rootView.findViewById(R.id.baslikuni);
+            Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
+            baslik.setTypeface(font);
+         /*   aksamonceki = (Button) rootView.findViewById(R.id.aksamonceki);
             aksamsonraki = (Button) rootView.findViewById(R.id.aksamsonraki);
             acorba = (TextView) rootView.findViewById(R.id.aksamcorba);
             aana = (TextView) rootView.findViewById(R.id.aksamana);
@@ -132,7 +142,7 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
                         Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
                     }
                 }
-            });
+            });*/
         }
         return rootView;
 
@@ -157,10 +167,10 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
 
     @Override
     public void fragmentBecameVisible() {
-        acorba.setText(yemekaksam.getString("anayemek"+FoodTabbed.gun,""));
+       /* acorba.setText(yemekaksam.getString("anayemek"+FoodTabbed.gun,""));
         aana.setText( yemekaksam.getString("ekyemek"+FoodTabbed.gun,""));
         aek.setText(yemekaksam.getString("tatli"+FoodTabbed.gun,""));
-        atatli.setText(yemekaksam.getString("corba"+FoodTabbed.gun,""));
+        atatli.setText(yemekaksam.getString("corba"+FoodTabbed.gun,""));*/
     }
 
     /**

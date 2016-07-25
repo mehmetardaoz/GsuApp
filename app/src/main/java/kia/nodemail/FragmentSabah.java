@@ -2,6 +2,7 @@ package kia.nodemail;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -97,7 +100,15 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
         else {
 
             rootView = inflater.inflate(R.layout.fragment_sabah, container, false);
-            scorba = (TextView) rootView.findViewById(R.id.sabahcorba);
+            ListView lw_sabahYemek = (ListView) rootView.findViewById(R.id.lw_sabahYemek);
+            final String[] values = new String[]{yemeksabah.getString("anayemek" + FoodTabbed.gun, ""),yemeksabah.getString("ekyemek" + FoodTabbed.gun, ""),yemeksabah.getString("tatli" + FoodTabbed.gun, ""),yemeksabah.getString("corba" + FoodTabbed.gun, "")};
+            ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
+            lw_sabahYemek.setAdapter(adapter);
+            TextView baslik = (TextView) rootView.findViewById(R.id.baslikuni);
+            Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
+            baslik.setTypeface(font);
+
+           /* scorba = (TextView) rootView.findViewById(R.id.sabahcorba);
             sana = (TextView) rootView.findViewById(R.id.sabahana);
             sek = (TextView) rootView.findViewById(R.id.sabahek);
             statli = (TextView) rootView.findViewById(R.id.sabahtatli);
@@ -138,7 +149,7 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
                     }
                 }
 
-            });
+            });*/
         }
 
         return rootView;
@@ -165,10 +176,10 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
 
     @Override
     public void fragmentBecameVisible() {
-        scorba.setText(yemeksabah.getString("anayemek"+FoodTabbed.gun,""));
+       /* scorba.setText(yemeksabah.getString("anayemek"+FoodTabbed.gun,""));
         sana.setText( yemeksabah.getString("ekyemek"+FoodTabbed.gun,""));
         sek.setText(yemeksabah.getString("tatli"+FoodTabbed.gun,""));
-        statli.setText(yemeksabah.getString("corba"+FoodTabbed.gun,""));
+        statli.setText(yemeksabah.getString("corba"+FoodTabbed.gun,""));*/
     }
 
     /**
