@@ -15,6 +15,9 @@
     </string>
     <string name="title_activity_food">FoodActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="action_user">User</string>
+    <string name="action_search">Search</string>
+    <string name="action_home">Home</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_yemekswipe">yemekswipe</string>
     <string name="title_activity_food_swipe">FoodSwipe</string>
