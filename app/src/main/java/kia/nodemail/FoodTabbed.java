@@ -1,7 +1,9 @@
 package kia.nodemail;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -24,6 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 
 public class FoodTabbed extends AppCompatActivity{
 
@@ -48,6 +52,7 @@ public class FoodTabbed extends AppCompatActivity{
     View dlProgressView;
     TabLayout tabLayout;
 
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -66,9 +71,11 @@ public class FoodTabbed extends AppCompatActivity{
 
 
 
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
 
 
        /* tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -104,7 +111,9 @@ public class FoodTabbed extends AppCompatActivity{
             }
         });
 
+
         //ÖÐLEN YEMEK ÇEKME
+
         yemekoglen = getSharedPreferences("OglenYemek", Context.MODE_PRIVATE);
         SharedPreferences.Editor yemekogleneditor = yemekoglen.edit();
         if(yemekoglen.getString("date"+FoodTabbed.gun,null) == null) {
@@ -137,6 +146,7 @@ public class FoodTabbed extends AppCompatActivity{
         yemekaksam = getSharedPreferences("AksamYemek",Context.MODE_PRIVATE);
         SharedPreferences.Editor yemekaksameditor = yemekaksam.edit();
         if(yemekaksam.getString("date"+FoodTabbed.gun,null) == null) {
+
             yemekaksameditor.clear();
             for (int i = 1; i <31; i++) {
                 sr = new ServerRequest();
@@ -153,7 +163,7 @@ public class FoodTabbed extends AppCompatActivity{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                ;
+
                 yemekaksameditor.putString("date" + String.valueOf(i), String.valueOf(i) + "." + FoodTabbed.ay + "." + FoodTabbed.yil);
                 yemekaksameditor.putString("anayemek" + String.valueOf(i), anayemek);
                 yemekaksameditor.putString("ekyemek" + String.valueOf(i), ekyemek);
