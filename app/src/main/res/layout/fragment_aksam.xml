@@ -19,7 +19,6 @@
         android:layout_marginBottom="52dp"
         android:layout_above="@+id/lw_aksamYemek"
         android:layout_centerHorizontal="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +41,8 @@
         android:textSize="50dp"
         android:layout_alignTop="@+id/gunonceki"
         android:layout_alignParentEnd="true" />
+
+
 
     <ListView
         android:layout_width="wrap_content"

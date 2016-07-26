@@ -2,7 +2,9 @@ package kia.nodemail;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import org.apache.http.NameValuePair;
@@ -51,6 +54,7 @@ public class FoodTabbed extends AppCompatActivity{
     String anayemek,ekyemek,tatli,corba;
     View dlProgressView;
     TabLayout tabLayout;
+    ImageButton face,twitter,linkedin;
 
 
     /**
@@ -68,8 +72,27 @@ public class FoodTabbed extends AppCompatActivity{
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-
+        face = (ImageButton) findViewById(R.id.facebook_btn);
+        twitter = (ImageButton) findViewById(R.id.twitter_btn);
+        linkedin = (ImageButton) findViewById(R.id.linkedin_btn);
+        face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToFace();
+            }
+        });
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToTwitter();
+            }
+        });
+        linkedin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLinkedIn();
+            }
+        });
 
 
         // Set up the ViewPager with the sections adapter.
@@ -303,6 +326,20 @@ public class FoodTabbed extends AppCompatActivity{
 
     public interface YourFragmentInterface {
         void fragmentBecameVisible();
+    }
+    public void goToFace(){
+        goToUrl("https://www.facebook.com/groups/2261993485/?fref=ts");
+    }
+    public void goToTwitter(){
+        goToUrl("https://twitter.com/Galatasaray_Uni");
+    }
+    public void goToLinkedIn(){
+        goToUrl("https://www.linkedin.com/groups/3510548/profile");
+    }
+    public void goToUrl(String url){
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
     }
 
 

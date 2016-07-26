@@ -3,10 +3,12 @@ package kia.nodemail;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class ProfileActiv extends AppCompatActivity{
     TextView token_text,grav_text;
     Button logout,yemekgec,yemekswipe;
     UserSessionManager session;
+    ImageButton face,twitter,linkedIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +42,9 @@ public class ProfileActiv extends AppCompatActivity{
         grav_text = (TextView) findViewById(R.id.token2);
         yemekgec = (Button) findViewById(R.id.foodbutton);
         yemekswipe = (Button) findViewById(R.id.yemekswipe);
-
+        face = (ImageButton) findViewById(R.id.facebook_btn);
+        twitter = (ImageButton) findViewById(R.id.twitter_btn);
+        linkedIn = (ImageButton) findViewById(R.id.linkedin_btn);
         logout = (Button) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +60,24 @@ public class ProfileActiv extends AppCompatActivity{
                 finish();
             }
         });*/
-
+        face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToFace();
+            }
+        });
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToTwitter();
+            }
+        });
+        linkedIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLinkedIn();
+            }
+        });
         yemekswipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,4 +91,19 @@ public class ProfileActiv extends AppCompatActivity{
 
 
     }
+    public  void goToFace(){
+        goToUrl("https://www.facebook.com/groups/2261993485/?fref=ts");
+    }
+    public void goToTwitter(){
+        goToUrl("https://twitter.com/Galatasaray_Uni");
+    }
+    public  void goToLinkedIn(){
+        goToUrl("https://www.linkedin.com/groups/3510548/profile");
+    }
+    public void goToUrl(String url){
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
+    }
+
 }
