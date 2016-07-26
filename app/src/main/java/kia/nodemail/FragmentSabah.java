@@ -46,6 +46,7 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
     SharedPreferences yemeksabah;
     Button sabahoncek,sabahsonraki;
     View rootView;
+    Typeface font;
 
 
 
@@ -98,16 +99,30 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
         }
 
         else {
-
+            font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
             rootView = inflater.inflate(R.layout.fragment_sabah, container, false);
+            TextView belirtec_sabah = (TextView) rootView.findViewById(R.id.bildirgec_sabah);
+            belirtec_sabah.setTypeface(font);
             ListView lw_sabahYemek = (ListView) rootView.findViewById(R.id.lw_sabahYemek);
             final String[] values = new String[]{yemeksabah.getString("anayemek" + FoodTabbed.gun, ""),yemeksabah.getString("ekyemek" + FoodTabbed.gun, ""),yemeksabah.getString("tatli" + FoodTabbed.gun, ""),yemeksabah.getString("corba" + FoodTabbed.gun, "")};
-            ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
-            lw_sabahYemek.setAdapter(adapter);
-            TextView tarih = (TextView) rootView.findViewById(R.id.tarih_sabah);
-            tarih.setText(String.valueOf(FoodTabbed.gun) + "." + String.valueOf((FoodTabbed.ay) ) + "." + String.valueOf(FoodTabbed.yil));
+           ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values){
+               @Override
+               public View getView(int position, View convertView, ViewGroup parent){
 
-            Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
+                   View view = super.getView(position, convertView, parent);
+
+                   TextView textview = (TextView) view.findViewById(R.id.label);
+
+                   //Set your Font Size Here.
+                    textview.setTypeface(font);
+
+                   return view;
+               }
+           };
+
+           // CustomListAdapter adapter = new CustomListAdapter(getActivity(),R.layout.activity_listview,values);
+            lw_sabahYemek.setAdapter(adapter);
+
 //            baslik.setTypeface(font);
 
            /* scorba = (TextView) rootView.findViewById(R.id.sabahcorba);

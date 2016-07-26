@@ -12,31 +12,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tarih_aksam"
-        android:layout_gravity="center_horizontal|top"
-        android:textSize="20dp"
-        android:gravity="top|center_vertical|center_horizontal"
-        android:layout_marginBottom="2dp"
-        android:height="25dp"
-        android:layout_marginTop="0dp"
-        android:textStyle="bold"
-        android:layout_above="@+id/bildirgec_aksam"
-        android:layout_centerHorizontal="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Akşam"
         android:id="@+id/bildirgec_aksam"
         android:layout_gravity="center_horizontal|top"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:gravity="top|center_vertical|center_horizontal"
         android:layout_marginBottom="15dp"
-        android:height="25dp"
-        android:layout_marginTop="0dp"
+        android:height="35dp"
+        android:layout_marginTop="40dp"
         android:textStyle="bold"
-        android:layout_above="@+id/lw_aksamYemek"
+        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true" />
-    <Button
+   <!-- <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="&lt;"
@@ -57,7 +44,7 @@
         android:gravity="right"
         android:textSize="50dp"
         android:layout_alignTop="@+id/gunonceki"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true" />-->
 
 
 
@@ -69,6 +56,7 @@
         tools:listitem="@android:layout/simple_list_item_1"
         android:layout_centerVertical="true"
         android:clickable="false"
+        android:layout_below="@id/bildirgec_aksam"
         android:listSelector="@android:color/transparent"
         android:divider="@drawable/listview_divider"
         android:footerDividersEnabled="false"/>

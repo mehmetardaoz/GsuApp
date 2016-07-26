@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -20,7 +21,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -55,6 +58,7 @@ public class FoodTabbed extends AppCompatActivity{
     View dlProgressView;
     TabLayout tabLayout;
     ImageButton face,twitter,linkedin;
+    ImageView previous,next;
 
 
     /**
@@ -64,11 +68,14 @@ public class FoodTabbed extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        dlProgressView = findViewById(R.id.dl_progress);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_tabbed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.home_beyaz2);
+        TextView tarih = (TextView) findViewById(R.id.tarih_sabah);
+        tarih.setText(String.valueOf(FoodTabbed.gun) + "." + String.valueOf((FoodTabbed.ay) ) + "." + String.valueOf(FoodTabbed.yil));
+        Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/Ornitons-Medium.ttf");
+        tarih.setTypeface(font);
 
 
         setSupportActionBar(toolbar);
@@ -97,7 +104,9 @@ public class FoodTabbed extends AppCompatActivity{
                 goToLinkedIn();
             }
         });
-
+        previous = (ImageView) findViewById(R.id.back);
+        next = (ImageView) findViewById(R.id.next);
+        previous.setVisibility(View.INVISIBLE);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -130,6 +139,17 @@ public class FoodTabbed extends AppCompatActivity{
                 if (fragment != null) {
                     fragment.fragmentBecameVisible();
                 }
+                if(position ==0){
+                    previous.setVisibility(View.INVISIBLE);
+                }
+                else if(position == 1 ){
+                    previous.setVisibility(View.VISIBLE);
+                    next.setVisibility(View.VISIBLE);
+                }
+                else if(position == 2){
+                    next.setVisibility(View.INVISIBLE);
+                }
+
             }
 
             @Override

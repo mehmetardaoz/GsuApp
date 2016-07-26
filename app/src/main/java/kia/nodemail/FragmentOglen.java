@@ -54,7 +54,7 @@ public class FragmentOglen extends Fragment implements FoodTabbed.YourFragmentIn
     View rootView;
     ArrayAdapter adapter;
     ListView lw_yemek;
-
+    Typeface font;
 
 
 
@@ -100,16 +100,31 @@ public class FragmentOglen extends Fragment implements FoodTabbed.YourFragmentIn
         else {
             final String[] values = new String[]{yemekoglen.getString("anayemek" + FoodTabbed.gun, ""),yemekoglen.getString("ekyemek" + FoodTabbed.gun, ""),yemekoglen.getString("tatli" + FoodTabbed.gun, ""),yemekoglen.getString("corba" + FoodTabbed.gun, "")};
            // final String[] values = new String[]{"ahmet","mehmet"};
-
+            font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
 
             rootView = inflater.inflate(R.layout.fragment_oglen, container, false);
+            TextView belirtec_oglen = (TextView) rootView.findViewById(R.id.bildirgec_oglen);
+            belirtec_oglen.setTypeface(font);
             lw_yemek = (ListView) rootView.findViewById(R.id.lw_oglenYemek);
-            adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
+            ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent){
+
+                    View view = super.getView(position, convertView, parent);
+
+                    TextView textview = (TextView) view.findViewById(R.id.label);
+
+                    //Set your Font Size Here.
+
+                    textview.setTypeface(font);
+
+                    return view;
+                }
+            };
             lw_yemek.setAdapter(adapter);
 
             Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
-            TextView tarih = (TextView) rootView.findViewById(R.id.tarih_oglen);
-            tarih.setText(String.valueOf(FoodTabbed.gun) + "." + String.valueOf((FoodTabbed.ay) ) + "." + String.valueOf(FoodTabbed.yil));
+
 
           /*  ocorba = (TextView) rootView.findViewById(R.id.oglencorba);
             oana = (TextView) rootView.findViewById(R.id.oglenana);
