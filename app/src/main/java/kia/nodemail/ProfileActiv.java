@@ -117,6 +117,9 @@ public class ProfileActiv extends AppCompatActivity{
                 return true;
 
             case R.id.action_user:
+                Intent proflele = new Intent(getApplicationContext(),ProfileActivity.class);
+                startActivity(proflele);
+
                 return true;
             //case R.id.action_home:
             //return true;
