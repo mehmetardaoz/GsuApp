@@ -67,12 +67,12 @@ public class FoodTabbed extends AppCompatActivity{
         dlProgressView = findViewById(R.id.dl_progress);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_tabbed);
-        setTitle("Gsü App");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.home_beyaz2);
 
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -261,8 +261,6 @@ public class FoodTabbed extends AppCompatActivity{
         switch (item.getItemId()) {
             case R.id.action_search:
 
-                return true;
-            case R.id.action_settings:
                 return true;
             case R.id.action_user:
                 return true;

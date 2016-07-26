@@ -104,9 +104,11 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
             final String[] values = new String[]{yemeksabah.getString("anayemek" + FoodTabbed.gun, ""),yemeksabah.getString("ekyemek" + FoodTabbed.gun, ""),yemeksabah.getString("tatli" + FoodTabbed.gun, ""),yemeksabah.getString("corba" + FoodTabbed.gun, "")};
             ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
             lw_sabahYemek.setAdapter(adapter);
-            TextView baslik = (TextView) rootView.findViewById(R.id.baslikuni);
+            TextView tarih = (TextView) rootView.findViewById(R.id.tarih_sabah);
+            tarih.setText(String.valueOf(FoodTabbed.gun) + "." + String.valueOf((FoodTabbed.ay) ) + "." + String.valueOf(FoodTabbed.yil));
+
             Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
-            baslik.setTypeface(font);
+//            baslik.setTypeface(font);
 
            /* scorba = (TextView) rootView.findViewById(R.id.sabahcorba);
             sana = (TextView) rootView.findViewById(R.id.sabahana);
@@ -180,6 +182,7 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
         sana.setText( yemeksabah.getString("ekyemek"+FoodTabbed.gun,""));
         sek.setText(yemeksabah.getString("tatli"+FoodTabbed.gun,""));
         statli.setText(yemeksabah.getString("corba"+FoodTabbed.gun,""));*/
+
     }
 
     /**

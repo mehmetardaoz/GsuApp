@@ -106,9 +106,10 @@ public class FragmentOglen extends Fragment implements FoodTabbed.YourFragmentIn
             lw_yemek = (ListView) rootView.findViewById(R.id.lw_oglenYemek);
             adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
             lw_yemek.setAdapter(adapter);
-            baslik = (TextView) rootView.findViewById(R.id.baslikuni);
+
             Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
-            baslik.setTypeface(font);
+            TextView tarih = (TextView) rootView.findViewById(R.id.tarih_oglen);
+            tarih.setText(String.valueOf(FoodTabbed.gun) + "." + String.valueOf((FoodTabbed.ay) ) + "." + String.valueOf(FoodTabbed.yil));
 
           /*  ocorba = (TextView) rootView.findViewById(R.id.oglencorba);
             oana = (TextView) rootView.findViewById(R.id.oglenana);

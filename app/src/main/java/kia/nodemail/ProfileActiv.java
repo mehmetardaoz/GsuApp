@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -29,6 +32,10 @@ public class ProfileActiv extends AppCompatActivity{
         session = new UserSessionManager(getApplicationContext());
         if(session.checkLogin())
             finish();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.home_beyaz2);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
       //  Toast.makeText(getApplicationContext(),
         //        "User Login Status: " + session.isUserLoggedIn(),
@@ -38,9 +45,7 @@ public class ProfileActiv extends AppCompatActivity{
         //pref = getSharedPreferences("AppPref", MODE_PRIVATE);
       //  token1 = pref.getString("name", "");
        // grav1 = pref.getString("mail", "");
-        token_text = (TextView) findViewById(R.id.token);
-        grav_text = (TextView) findViewById(R.id.token2);
-        yemekgec = (Button) findViewById(R.id.foodbutton);
+
         yemekswipe = (Button) findViewById(R.id.yemekswipe);
         face = (ImageButton) findViewById(R.id.facebook_btn);
         twitter = (ImageButton) findViewById(R.id.twitter_btn);
@@ -50,6 +55,7 @@ public class ProfileActiv extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 session.logoutUser();
+                finish();
             }
         });
         /*yemekgec.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +92,37 @@ public class ProfileActiv extends AppCompatActivity{
               //  finish();
             }
         });
-        token_text.setText(token1);
-        grav_text.setText(grav1);
+
+
+
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_food_tabbed, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+
+        switch (item.getItemId()) {
+            case R.id.action_search:
+
+                return true;
+
+            case R.id.action_user:
+                return true;
+            //case R.id.action_home:
+            //return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
 
     }

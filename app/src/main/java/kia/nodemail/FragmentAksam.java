@@ -98,10 +98,12 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
             ListView lw_aksamYemek = (ListView) rootView.findViewById(R.id.lw_aksamYemek);
             final String[] values = new String[]{yemekaksam.getString("anayemek" + FoodTabbed.gun, ""),yemekaksam.getString("ekyemek" + FoodTabbed.gun, ""),yemekaksam.getString("tatli" + FoodTabbed.gun, ""),yemekaksam.getString("corba" + FoodTabbed.gun, "")};
             ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
+            TextView tarih = (TextView) rootView.findViewById(R.id.tarih_aksam);
+            tarih.setText(String.valueOf(FoodTabbed.gun) + "." + String.valueOf((FoodTabbed.ay) ) + "." + String.valueOf(FoodTabbed.yil));
             lw_aksamYemek.setAdapter(adapter);
-            TextView baslik = (TextView) rootView.findViewById(R.id.baslikuni);
+       //     TextView baslik = (TextView) rootView.findViewById(R.id.baslikuni);
             Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
-            baslik.setTypeface(font);
+//            baslik.setTypeface(font);
          /*   aksamonceki = (Button) rootView.findViewById(R.id.aksamonceki);
             aksamsonraki = (Button) rootView.findViewById(R.id.aksamsonraki);
             acorba = (TextView) rootView.findViewById(R.id.aksamcorba);

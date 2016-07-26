@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
     android:gravity="center_horizontal">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="281dp"
-        android:layout_height="58dp"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/linearLayout"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ee413c"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hoşgeldiniz!"
-            android:id="@+id/textView"
-            android:layout_weight="0.22"
-            android:singleLine="true"
-            android:textSize="20dp" />
-    </LinearLayout>
+            android:text="GSU"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="APP"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title1" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="YemekNormal"
-        android:id="@+id/foodbutton"
-        android:layout_gravity="center_horizontal"
-        android:layout_above="@+id/logout"
-        android:layout_alignStart="@+id/logout" />
+    </android.support.v7.widget.Toolbar>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -43,9 +46,10 @@
         android:text="YemekSwipe"
         android:id="@+id/yemekswipe"
         android:layout_gravity="center_horizontal"
-        android:layout_marginEnd="69dp"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/linearLayout" />
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="136dp"
+        android:layout_alignStart="@+id/logout"
+        android:layout_alignEnd="@+id/logout" />
 
     <Button
         android:layout_width="117dp"
@@ -53,31 +57,11 @@
         android:text="Logout"
         android:id="@+id/logout"
         android:layout_gravity="center_horizontal"
-        android:layout_above="@+id/yemekswipe"
-        android:layout_alignEnd="@+id/yemekswipe" />
+        android:layout_below="@+id/yemekswipe"
+        android:layout_centerHorizontal="true" />
 
-    <include layout="@layout/footer"></include>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/token"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.22"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/token2"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.22"
-        android:layout_below="@+id/token"
-        android:layout_toEndOf="@+id/logout" />
+    <include layout="@layout/footer"
+        android:id="@+id/include"></include>
 
 
 </RelativeLayout>

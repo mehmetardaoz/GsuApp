@@ -8,15 +8,32 @@
     <!-- TODO: Update blank fragment layout -->
 
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Galatasaray Üniversitesi"
-        android:id="@+id/baslikuni"
+        android:id="@+id/tarih_aksam"
         android:layout_gravity="center_horizontal|top"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:gravity="top|center_vertical|center_horizontal"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="2dp"
+        android:height="25dp"
+        android:layout_marginTop="0dp"
+        android:textStyle="bold"
+        android:layout_above="@+id/bildirgec_aksam"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Akşam"
+        android:id="@+id/bildirgec_aksam"
+        android:layout_gravity="center_horizontal|top"
+        android:textSize="20dp"
+        android:gravity="top|center_vertical|center_horizontal"
+        android:layout_marginBottom="15dp"
+        android:height="25dp"
+        android:layout_marginTop="0dp"
+        android:textStyle="bold"
         android:layout_above="@+id/lw_aksamYemek"
         android:layout_centerHorizontal="true" />
     <Button
@@ -51,8 +68,6 @@
         android:layout_gravity="left|center_vertical"
         tools:listitem="@android:layout/simple_list_item_1"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/baslikuni"
-        android:layout_alignEnd="@+id/baslikuni"
         android:clickable="false"
         android:listSelector="@android:color/transparent"
         android:divider="@drawable/listview_divider"
