@@ -2,6 +2,7 @@ package kia.nodemail;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,7 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
     String anayemek,ekyemek,tatli,corba;
     SharedPreferences yemekaksam;
     Button aksamonceki,aksamsonraki;
+    View rootView;
 
    // private FragmentSabah.OnFragmentInteractionListener mListener;
 
@@ -56,8 +60,6 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment FragmentAksam.
      */
     // TODO: Rename and change types and number of parameters
@@ -86,50 +88,62 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
         Log.d("Hello","Ben geldim");
         yemekaksam = getContext().getSharedPreferences("AksamYemek",Context.MODE_PRIVATE);
 
-        View rootView = inflater.inflate(R.layout.fragment_aksam, container, false);
-        aksamonceki = (Button) rootView.findViewById(R.id.aksamonceki);
-        aksamsonraki = (Button) rootView.findViewById(R.id.aksamsonraki);
-        acorba = (TextView) rootView.findViewById(R.id.aksamcorba);
-        aana = (TextView) rootView.findViewById(R.id.aksamana);
-        aek = (TextView) rootView.findViewById(R.id.aksamek);
-        atatli = (TextView) rootView.findViewById(R.id.aksamtatli);
+        if(FoodTabbed.haftaningunu == 1 ||FoodTabbed.haftaningunu == 7){
+            rootView = inflater.inflate(R.layout.fragment_haftasonu,container,false);
+            Log.d("Hello", String.valueOf(FoodTabbed.haftaningunu));
+        }
+        else {
 
-        acorba.setText(yemekaksam.getString("anayemek"+FoodTabbed.gun,""));
-        aana.setText( yemekaksam.getString("ekyemek"+FoodTabbed.gun,""));
-        aek.setText(yemekaksam.getString("tatli"+FoodTabbed.gun,""));
-        atatli.setText(yemekaksam.getString("corba"+FoodTabbed.gun,""));
+            rootView = inflater.inflate(R.layout.fragment_aksam, container, false);
+            ListView lw_aksamYemek = (ListView) rootView.findViewById(R.id.lw_aksamYemek);
+            final String[] values = new String[]{yemekaksam.getString("anayemek" + FoodTabbed.gun, ""),yemekaksam.getString("ekyemek" + FoodTabbed.gun, ""),yemekaksam.getString("tatli" + FoodTabbed.gun, ""),yemekaksam.getString("corba" + FoodTabbed.gun, "")};
+            ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
+            lw_aksamYemek.setAdapter(adapter);
+            TextView baslik = (TextView) rootView.findViewById(R.id.baslikuni);
+            Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
+            baslik.setTypeface(font);
+         /*   aksamonceki = (Button) rootView.findViewById(R.id.aksamonceki);
+            aksamsonraki = (Button) rootView.findViewById(R.id.aksamsonraki);
+            acorba = (TextView) rootView.findViewById(R.id.aksamcorba);
+            aana = (TextView) rootView.findViewById(R.id.aksamana);
+            aek = (TextView) rootView.findViewById(R.id.aksamek);
+            atatli = (TextView) rootView.findViewById(R.id.aksamtatli);
 
-        aksamonceki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.valueOf(FoodTabbed.gun) - 1 > 0) {
-                    FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) - 1);
-                    acorba.setText(yemekaksam.getString("anayemek" + FoodTabbed.gun, ""));
-                    aana.setText(yemekaksam.getString("ekyemek" + FoodTabbed.gun, ""));
-                    aek.setText(yemekaksam.getString("tatli" + FoodTabbed.gun, ""));
-                    atatli.setText(yemekaksam.getString("corba" + FoodTabbed.gun, ""));
+            acorba.setText(yemekaksam.getString("anayemek" + FoodTabbed.gun, ""));
+            aana.setText(yemekaksam.getString("ekyemek" + FoodTabbed.gun, ""));
+            aek.setText(yemekaksam.getString("tatli" + FoodTabbed.gun, ""));
+            atatli.setText(yemekaksam.getString("corba" + FoodTabbed.gun, ""));
+
+            aksamonceki.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Integer.valueOf(FoodTabbed.gun) - 1 > 0) {
+                        FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) - 1);
+                        acorba.setText(yemekaksam.getString("anayemek" + FoodTabbed.gun, ""));
+                        aana.setText(yemekaksam.getString("ekyemek" + FoodTabbed.gun, ""));
+                        aek.setText(yemekaksam.getString("tatli" + FoodTabbed.gun, ""));
+                        atatli.setText(yemekaksam.getString("corba" + FoodTabbed.gun, ""));
+                    } else Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
+
                 }
-                else Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
+            });
 
-            }
-        });
+            aksamsonraki.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Integer.valueOf(FoodTabbed.gun) + 1 < 31) {
+                        FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) + 1);
+                        acorba.setText(yemekaksam.getString("anayemek" + FoodTabbed.gun, ""));
+                        aana.setText(yemekaksam.getString("ekyemek" + FoodTabbed.gun, ""));
+                        aek.setText(yemekaksam.getString("tatli" + FoodTabbed.gun, ""));
+                        atatli.setText(yemekaksam.getString("corba" + FoodTabbed.gun, ""));
 
-        aksamsonraki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.valueOf(FoodTabbed.gun) + 1 < 31) {
-                    FoodTabbed.gun = String.valueOf(Integer.valueOf(FoodTabbed.gun) + 1);
-                    acorba.setText(yemekaksam.getString("anayemek" + FoodTabbed.gun, ""));
-                    aana.setText(yemekaksam.getString("ekyemek" + FoodTabbed.gun, ""));
-                    aek.setText(yemekaksam.getString("tatli" + FoodTabbed.gun, ""));
-                    atatli.setText(yemekaksam.getString("corba" + FoodTabbed.gun, ""));
-
-                } else {
-                    Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Günü Aþtýnýz", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
-
+            });*/
+        }
         return rootView;
 
     }
@@ -153,10 +167,10 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
 
     @Override
     public void fragmentBecameVisible() {
-        acorba.setText(yemekaksam.getString("anayemek"+FoodTabbed.gun,""));
+       /* acorba.setText(yemekaksam.getString("anayemek"+FoodTabbed.gun,""));
         aana.setText( yemekaksam.getString("ekyemek"+FoodTabbed.gun,""));
         aek.setText(yemekaksam.getString("tatli"+FoodTabbed.gun,""));
-        atatli.setText(yemekaksam.getString("corba"+FoodTabbed.gun,""));
+        atatli.setText(yemekaksam.getString("corba"+FoodTabbed.gun,""));*/
     }
 
     /**

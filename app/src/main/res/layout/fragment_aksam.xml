@@ -1,73 +1,59 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="kia.nodemail.FragmentAksam">
+    android:layout_height="match_parent"
+    tools:context=".FragmentOglen"
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="left|top">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Galatasaray Üniversitesi"
+        android:id="@+id/baslikuni"
+        android:layout_gravity="center_horizontal|top"
+        android:textSize="30dp"
+        android:gravity="top|center_vertical|center_horizontal"
+        android:layout_marginBottom="52dp"
+        android:layout_above="@+id/lw_aksamYemek"
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/aksamtatli"
-            android:layout_below="@+id/aksamek"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="&lt;"
+        android:id="@+id/gunonceki"
+        android:background="@android:color/transparent"
+        android:textSize="50dp"
+        android:gravity="left"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/aksamek"
-            android:layout_below="@+id/aksamana"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=">"
+        android:id="@+id/gunsonraki"
+        android:background="@android:color/transparent"
+        android:fontFamily="Orni"
+        android:gravity="right"
+        android:textSize="50dp"
+        android:layout_alignTop="@+id/gunonceki"
+        android:layout_alignParentEnd="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/aksamcorba"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center" />
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lw_aksamYemek"
+        android:layout_gravity="left|center_vertical"
+        tools:listitem="@android:layout/simple_list_item_1"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/baslikuni"
+        android:layout_alignEnd="@+id/baslikuni"
+        android:clickable="false"
+        android:listSelector="@android:color/transparent"
+        android:divider="@drawable/listview_divider"
+        android:footerDividersEnabled="false"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/aksamana"
-            android:layout_below="@+id/aksamcorba"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Önceki Gün"
-            android:id="@+id/aksamonceki"
-            android:layout_below="@+id/aksamtatli"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sonraki Gün"
-            android:id="@+id/aksamsonraki"
-            android:layout_below="@+id/aksamtatli"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center" />
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>
