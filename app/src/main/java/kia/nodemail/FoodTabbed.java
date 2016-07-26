@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,20 +20,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 
 public class FoodTabbed extends AppCompatActivity{
@@ -51,14 +44,10 @@ public class FoodTabbed extends AppCompatActivity{
     public static String ay = String.valueOf(maintenant.get(Calendar.MONTH)+1);
     public static String yil = String.valueOf(maintenant.get(Calendar.YEAR));
     public static int haftaningunu = maintenant.get(Calendar.DAY_OF_WEEK);
-    SharedPreferences yemekoglen,yemekaksam,yemeksabah;
-    ServerRequest sr;
-    List<NameValuePair> params;
-    String anayemek,ekyemek,tatli,corba;
-    View dlProgressView;
-    TabLayout tabLayout;
+
     ImageButton face,twitter,linkedin;
     ImageView previous,next;
+
 
 
     /**
@@ -78,7 +67,16 @@ public class FoodTabbed extends AppCompatActivity{
         tarih.setTypeface(font);
 
 
+
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent anasayfa = new Intent(FoodTabbed.this,ProfileActiv.class);
+                startActivity(anasayfa);
+                finish();
+            }
+        });
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -158,10 +156,7 @@ public class FoodTabbed extends AppCompatActivity{
             }
         });
 
-
-        //ÖÐLEN YEMEK ÇEKME
-
-        yemekoglen = getSharedPreferences("OglenYemek", Context.MODE_PRIVATE);
+       /* yemekoglen = getSharedPreferences("OglenYemek", Context.MODE_PRIVATE);
         SharedPreferences.Editor yemekogleneditor = yemekoglen.edit();
         if(yemekoglen.getString("date"+FoodTabbed.gun,null) == null) {
             yemekogleneditor.clear();
@@ -262,6 +257,12 @@ public class FoodTabbed extends AppCompatActivity{
         });*/
 
     }
+
+
+
+
+
+
 
 
     @Override
@@ -376,4 +377,6 @@ public class FoodTabbed extends AppCompatActivity{
 
 
 
+
 }
+

@@ -83,12 +83,6 @@ public class FragmentSabah extends Fragment implements FoodTabbed.YourFragmentIn
         // Inflate the layout for this fragment
 
         yemeksabah = getContext().getSharedPreferences("SabahYemek",Context.MODE_PRIVATE);
-
-        Log.d("Hello", String.valueOf(FoodTabbed.haftaningunu));
-
-
-        
-        //// TODO: 26.06.2016 Tarih için yeni bi textview hazýrlayýp koy
         yemeksabah.getString("date"+FoodTabbed.gun,"");
 
 

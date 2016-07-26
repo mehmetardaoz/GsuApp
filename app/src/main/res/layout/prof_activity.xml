@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@drawable/arka">
 
 
 
@@ -15,16 +16,18 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#ee413c"
+        android:background="#b61117"
+        android:layout_marginTop="0dp"
+        android:paddingTop="0dp"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        >
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GSU"
             android:textStyle="bold"
-            android:textColor="@android:color/white"
+            android:textColor="#ef930e"
             android:textSize="20dp"
             android:layout_gravity="center"
             android:id="@+id/toolbar_title" />
@@ -36,6 +39,7 @@
             android:textSize="20dp"
             android:layout_gravity="center"
             android:id="@+id/toolbar_title1" />
+
 
     </android.support.v7.widget.Toolbar>
 

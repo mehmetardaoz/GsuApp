@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_weight="1"
-        android:background="@drawable/arka"
+        android:background="@drawable/arkapln"
         android:layout_above="@+id/include2"
         android:layout_below="@+id/tarih_sabah" />
 
