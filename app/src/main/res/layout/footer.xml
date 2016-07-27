@@ -26,7 +26,6 @@
             android:layout_height="25dp"
             android:id="@+id/twitter_btn"
             android:layout_gravity="right|center_vertical"
-            android:onClick=""
             android:background="@drawable/twitter"
             android:layout_marginRight="50dp"
             android:clickable="true" />
@@ -36,7 +35,6 @@
             android:layout_height="25dp"
             android:id="@+id/linkedin_btn"
             android:layout_gravity="right|center_vertical"
-            android:onClick=""
             android:background="@drawable/linkedin"
             android:layout_marginRight="10dp"
             android:clickable="true" />
