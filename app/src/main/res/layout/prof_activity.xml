@@ -50,18 +50,8 @@
         android:text="YemekSwipe"
         android:id="@+id/yemekswipe"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="149dp"
         android:layout_below="@+id/toolbar"
-        android:layout_marginTop="136dp"
-        android:layout_alignStart="@+id/logout"
-        android:layout_alignEnd="@+id/logout" />
-
-    <Button
-        android:layout_width="117dp"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:id="@+id/logout"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/yemekswipe"
         android:layout_centerHorizontal="true" />
 
     <include layout="@layout/footer"

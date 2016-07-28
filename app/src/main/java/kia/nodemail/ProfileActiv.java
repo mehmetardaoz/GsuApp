@@ -50,8 +50,10 @@ public class ProfileActiv extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.prof_activity);
         session = new UserSessionManager(getApplicationContext());
+
+        /*EÐER LOGIN SÝSTEMÝ GELÝRSE AKTÝF ET
         if(session.checkLogin())
-            finish();
+            finish();*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.home_beyaz2);
         setSupportActionBar(toolbar);
@@ -70,14 +72,14 @@ public class ProfileActiv extends AppCompatActivity{
         face = (ImageButton) findViewById(R.id.facebook_btn);
         twitter = (ImageButton) findViewById(R.id.twitter_btn);
         linkedIn = (ImageButton) findViewById(R.id.linkedin_btn);
-        logout = (Button) findViewById(R.id.logout);
+       /* logout = (Button) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 session.logoutUser();
                 finish();
             }
-        });
+        });*/
         /*yemekgec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
