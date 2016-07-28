@@ -20,6 +20,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,7 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
     SharedPreferences yemekaksam;
     Button aksamonceki,aksamsonraki;
     View rootView;
+    Typeface font;
 
    // private FragmentSabah.OnFragmentInteractionListener mListener;
 
@@ -88,20 +90,39 @@ public class FragmentAksam extends Fragment implements FoodTabbed.YourFragmentIn
         Log.d("Hello","Ben geldim");
         yemekaksam = getContext().getSharedPreferences("AksamYemek",Context.MODE_PRIVATE);
 
+
         if(FoodTabbed.haftaningunu == 1 ||FoodTabbed.haftaningunu == 7){
             rootView = inflater.inflate(R.layout.fragment_haftasonu,container,false);
             Log.d("Hello", String.valueOf(FoodTabbed.haftaningunu));
         }
         else {
+            font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
+
 
             rootView = inflater.inflate(R.layout.fragment_aksam, container, false);
+            TextView belirtec_aksam = (TextView) rootView.findViewById(R.id.bildirgec_aksam);
+            belirtec_aksam.setTypeface(font);
             ListView lw_aksamYemek = (ListView) rootView.findViewById(R.id.lw_aksamYemek);
             final String[] values = new String[]{yemekaksam.getString("anayemek" + FoodTabbed.gun, ""),yemekaksam.getString("ekyemek" + FoodTabbed.gun, ""),yemekaksam.getString("tatli" + FoodTabbed.gun, ""),yemekaksam.getString("corba" + FoodTabbed.gun, "")};
-            ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values);
+            ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.activity_listview,values){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent){
+
+                    View view = super.getView(position, convertView, parent);
+
+                    TextView textview = (TextView) view.findViewById(R.id.label);
+
+                    //Set your Font Size Here.
+
+                    textview.setTypeface(font);
+
+                    return view;
+                }
+            };
             lw_aksamYemek.setAdapter(adapter);
-            TextView baslik = (TextView) rootView.findViewById(R.id.baslikuni);
-            Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
-            baslik.setTypeface(font);
+       //     TextView baslik = (TextView) rootView.findViewById(R.id.baslikuni);
+        //    Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Ornitons-Medium.ttf");
+//            baslik.setTypeface(font);
          /*   aksamonceki = (Button) rootView.findViewById(R.id.aksamonceki);
             aksamsonraki = (Button) rootView.findViewById(R.id.aksamsonraki);
             acorba = (TextView) rootView.findViewById(R.id.aksamcorba);

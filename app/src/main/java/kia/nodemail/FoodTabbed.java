@@ -1,7 +1,13 @@
 package kia.nodemail;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,16 +20,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+
 
 public class FoodTabbed extends AppCompatActivity{
 
@@ -41,12 +44,11 @@ public class FoodTabbed extends AppCompatActivity{
     public static String ay = String.valueOf(maintenant.get(Calendar.MONTH)+1);
     public static String yil = String.valueOf(maintenant.get(Calendar.YEAR));
     public static int haftaningunu = maintenant.get(Calendar.DAY_OF_WEEK);
-    SharedPreferences yemekoglen,yemekaksam,yemeksabah;
-    ServerRequest sr;
-    List<NameValuePair> params;
-    String anayemek,ekyemek,tatli,corba;
-    View dlProgressView;
-    TabLayout tabLayout;
+
+    ImageButton face,twitter,linkedin;
+    ImageView previous,next;
+
+
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -55,20 +57,59 @@ public class FoodTabbed extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        dlProgressView = findViewById(R.id.dl_progress);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_tabbed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.home_beyaz2);
+        TextView tarih = (TextView) findViewById(R.id.tarih_sabah);
+        tarih.setText(String.valueOf(FoodTabbed.gun) + "." + String.valueOf((FoodTabbed.ay) ) + "." + String.valueOf(FoodTabbed.yil));
+        Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/Ornitons-Medium.ttf");
+        tarih.setTypeface(font);
+
+
+
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent anasayfa = new Intent(FoodTabbed.this,ProfileActiv.class);
+                startActivity(anasayfa);
+                finish();
+            }
+        });
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-
+        face = (ImageButton) findViewById(R.id.facebook_btn);
+        twitter = (ImageButton) findViewById(R.id.twitter_btn);
+        linkedin = (ImageButton) findViewById(R.id.linkedin_btn);
+        face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToFace();
+            }
+        });
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToTwitter();
+            }
+        });
+        linkedin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLinkedIn();
+            }
+        });
+        previous = (ImageView) findViewById(R.id.back);
+        next = (ImageView) findViewById(R.id.next);
+        previous.setVisibility(View.INVISIBLE);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
 
 
        /* tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -96,6 +137,17 @@ public class FoodTabbed extends AppCompatActivity{
                 if (fragment != null) {
                     fragment.fragmentBecameVisible();
                 }
+                if(position ==0){
+                    previous.setVisibility(View.INVISIBLE);
+                }
+                else if(position == 1 ){
+                    previous.setVisibility(View.VISIBLE);
+                    next.setVisibility(View.VISIBLE);
+                }
+                else if(position == 2){
+                    next.setVisibility(View.INVISIBLE);
+                }
+
             }
 
             @Override
@@ -104,8 +156,7 @@ public class FoodTabbed extends AppCompatActivity{
             }
         });
 
-        //ÖÐLEN YEMEK ÇEKME
-        yemekoglen = getSharedPreferences("OglenYemek", Context.MODE_PRIVATE);
+       /* yemekoglen = getSharedPreferences("OglenYemek", Context.MODE_PRIVATE);
         SharedPreferences.Editor yemekogleneditor = yemekoglen.edit();
         if(yemekoglen.getString("date"+FoodTabbed.gun,null) == null) {
             yemekogleneditor.clear();
@@ -137,6 +188,7 @@ public class FoodTabbed extends AppCompatActivity{
         yemekaksam = getSharedPreferences("AksamYemek",Context.MODE_PRIVATE);
         SharedPreferences.Editor yemekaksameditor = yemekaksam.edit();
         if(yemekaksam.getString("date"+FoodTabbed.gun,null) == null) {
+
             yemekaksameditor.clear();
             for (int i = 1; i <31; i++) {
                 sr = new ServerRequest();
@@ -153,7 +205,7 @@ public class FoodTabbed extends AppCompatActivity{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                ;
+
                 yemekaksameditor.putString("date" + String.valueOf(i), String.valueOf(i) + "." + FoodTabbed.ay + "." + FoodTabbed.yil);
                 yemekaksameditor.putString("anayemek" + String.valueOf(i), anayemek);
                 yemekaksameditor.putString("ekyemek" + String.valueOf(i), ekyemek);
@@ -207,6 +259,12 @@ public class FoodTabbed extends AppCompatActivity{
     }
 
 
+
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -219,14 +277,21 @@ public class FoodTabbed extends AppCompatActivity{
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+        switch (item.getItemId()) {
+            case R.id.action_search:
+
+                return true;
+            case R.id.action_user:
+                return true;
+            //case R.id.action_home:
+                //return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
+
     }
 
 
@@ -244,6 +309,7 @@ public class FoodTabbed extends AppCompatActivity{
 
 
         }
+
 
         @Override
         public Fragment getItem(int position) {
@@ -294,7 +360,23 @@ public class FoodTabbed extends AppCompatActivity{
     public interface YourFragmentInterface {
         void fragmentBecameVisible();
     }
+    public void goToFace(){
+        goToUrl("https://www.facebook.com/groups/2261993485/?fref=ts");
+    }
+    public void goToTwitter(){
+        goToUrl("https://twitter.com/Galatasaray_Uni");
+    }
+    public void goToLinkedIn(){
+        goToUrl("https://www.linkedin.com/groups/3510548/profile");
+    }
+    public void goToUrl(String url){
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
+    }
+
 
 
 
 }
+

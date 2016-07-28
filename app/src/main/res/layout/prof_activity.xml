@@ -1,64 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+
+
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
     android:gravity="center_horizontal">
 
-    <TextView
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:text="Hoşgeldiniz!"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.22"
-        android:singleLine="true"
-        android:textSize="20dp" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="281dp"
-        android:layout_height="58dp"
-        android:layout_gravity="center_horizontal">
-
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#b61117"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/token"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.22" />
-
+            android:text="GSU"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/token2"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.22" />
+            android:text="APP"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title1" />
 
-    </LinearLayout>
+    </android.support.v7.widget.Toolbar>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="YemekNormal"
-        android:id="@+id/foodbutton"
-        android:layout_gravity="center_horizontal" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="YemekSwipe"
-        android:id="@+id/yemekswipe"
-        android:layout_gravity="center_horizontal" />
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/include"
+        android:id="@+id/percentlayout">
 
-    <Button
-        android:layout_width="117dp"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:id="@+id/logout"
-        android:layout_gravity="center_horizontal" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DUYURULAR"
+            android:id="@+id/menu_duyurular"
+            android:textSize="16dp"
+            android:drawableTop="@drawable/duyurular_sonunsonu3"
+            android:drawablePadding="-2dp"
+            app:layout_heightPercent="33%"
+            app:layout_widthPercent="50%"
+            android:layout_alignParentEnd="true"
+            android:background="#eeeeee"/>
 
-</LinearLayout>
+        <Button
+            app:layout_heightPercent="33%"
+            app:layout_widthPercent="50%"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/menu_yemek"
+            android:drawableTop="@drawable/food_son"
+            android:textSize="16dp"
+            android:text="Yemek Menüsü"
+            android:layout_alignParentStart="true"
+            android:background="#f5f5f5" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ETKİNLİKLER"
+            android:drawableTop="@drawable/etkinlikler_son"
+            android:id="@+id/menu_etkinlikler"
+            android:layout_above="@+id/menu_hakkimizda"
+            android:layout_alignParentEnd="true"
+            android:textSize="16dp"
+            app:layout_heightPercent="33%"
+            app:layout_widthPercent="50%"
+            android:background="#e0e0e0"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/menu_yemek" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/hakkimizda_sonunsonu"
+            android:text="Hakkımızda"
+            android:drawablePadding="-10dp"
+            app:layout_heightPercent="34%"
+            app:layout_widthPercent="50%"
+            android:id="@+id/menu_hakkimizda"
+            android:focusableInTouchMode="false"
+            android:background="#bdbdbd"
+            android:textSize="16dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_below="@+id/menu_kikencere"
+            android:layout_toEndOf="@+id/menu_hocalar" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_heightPercent="34%"
+            app:layout_widthPercent="50%"
+            android:drawableTop="@drawable/hocalar_son"
+            android:drawablePadding="-10dp"
+            android:text="HOCALAR"
+            android:textSize="16dp"
+            android:id="@+id/menu_hocalar"
+            android:layout_below="@+id/menu_kikencere"
+            android:layout_alignParentStart="true"
+            android:layout_alignEnd="@+id/menu_yemek"
+            android:layout_margin="0dp"
+            android:background="#e0e0e0"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/kikencere_sonunsonu"
+            android:text="Kikencere"
+            android:id="@+id/menu_kikencere"
+            android:textSize="16dp"
+            android:layout_weight="1"
+            android:layout_below="@+id/menu_yemek"
+            android:layout_alignParentStart="true"
+            android:layout_alignEnd="@+id/menu_hocalar"
+            android:layout_marginTop="0dp"
+            android:layout_margin="0dp"
+            android:background="#eeeeee"
+            app:layout_heightPercent="33%"
+            app:layout_widthPercent="50%"
+            />
+    </android.support.percent.PercentRelativeLayout>
+
+    <include layout="@layout/footer"
+        android:id="@+id/include"
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"></include>
+
+
+
+</android.support.percent.PercentRelativeLayout>
