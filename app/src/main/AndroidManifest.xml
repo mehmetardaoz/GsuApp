@@ -20,7 +20,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:replace="android:label,android:icon"
 
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_launcher_192x192"
         android:label="GsuApp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">

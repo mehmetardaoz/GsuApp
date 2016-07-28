@@ -5,10 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.percent.PercentRelativeLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,7 +18,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,11 +49,14 @@ public class ProfileActiv extends AppCompatActivity{
     View dlProgressView;
     TabLayout tabLayout;
     ProgressDialog progress;
+    GridLayout gridLayout;
+    Typeface font;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.prof_activity);
         session = new UserSessionManager(getApplicationContext());
+        font = Typeface.createFromAsset(getAssets(),"fonts/Ornitons-Medium.ttf");
 
         /*EÐER LOGIN SÝSTEMÝ GELÝRSE AKTÝF ET
         if(session.checkLogin())
@@ -68,7 +75,25 @@ public class ProfileActiv extends AppCompatActivity{
       //  token1 = pref.getString("name", "");
        // grav1 = pref.getString("mail", "");
 
-        yemekswipe = (Button) findViewById(R.id.yemekswipe);
+        yemekswipe = (Button) findViewById(R.id.menu_yemek);
+        yemekswipe.setTypeface(font);
+        Button etkinliklerButton = (Button) findViewById(R.id.menu_etkinlikler);
+        etkinliklerButton.setTypeface(font);
+        Button hakkimizdaButton = (Button) findViewById(R.id.menu_hakkimizda);
+        hakkimizdaButton.setTypeface(font);
+        Button duyurularButton = (Button) findViewById(R.id.menu_duyurular);
+        duyurularButton.setTypeface(font);
+        Button hocalarButton = (Button) findViewById(R.id.menu_hocalar);
+        hocalarButton.setTypeface(font);
+        Button kikencereButton = (Button) findViewById(R.id.menu_kikencere);
+        kikencereButton.setTypeface(font);
+        kikencereButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToUrl("http://uni.gsu.edu.tr");
+            }
+        });
+
         face = (ImageButton) findViewById(R.id.facebook_btn);
         twitter = (ImageButton) findViewById(R.id.twitter_btn);
         linkedIn = (ImageButton) findViewById(R.id.linkedin_btn);
