@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GsuApp.iml" filepath="$PROJECT_DIR$/GsuApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/Nodemail.iml" filepath="$PROJECT_DIR$/Nodemail.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
